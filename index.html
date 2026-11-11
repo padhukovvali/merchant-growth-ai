@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paytm Vyapar-Growth Copilot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#002E6E;--card:#002970;--card2:#00347F;--cy:#00BAF2;--tx:#fff;--mu:#A9BEDC;--bd:rgba(0,186,242,.22);--ok:#2ED47A;--warn:#FFB020;--bad:#FF5A6E;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#0A4A9E 0%,var(--bg) 55%);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;font-size:14px}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+.app{display:flex;min-height:100vh}
+aside{width:236px;background:#00255C;border-right:1px solid var(--bd);padding:20px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:10px;padding:4px 8px 18px}
+.logo b{font-size:20px;letter-spacing:-.5px}.logo b span{color:var(--cy)}
+.logo small{display:block;color:var(--mu);font-size:11px;font-weight:500}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;background:none;color:var(--mu);text-align:left;font-weight:500;transition:.2s}
+.nav:hover{background:rgba(0,186,242,.08);color:#fff}
+.nav.on{background:rgba(0,186,242,.16);color:#fff;box-shadow:inset 3px 0 0 var(--cy)}
+.nav svg{width:18px;height:18px;flex-shrink:0}
+.side-foot{margin-top:auto;padding:12px;border:1px solid var(--bd);border-radius:12px;background:var(--card);font-size:12px;color:var(--mu)}
+.side-foot b{color:#fff;display:block;font-size:13px}
+main{flex:1;min-width:0;padding:22px 26px 40px;max-width:1440px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.top h1{margin:0;font-size:22px;letter-spacing:-.4px}.top p{margin:2px 0 0;color:var(--mu)}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--bd);border-radius:99px;background:var(--card);font-size:12px;color:var(--mu)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(46,212,122,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(46,212,122,0)}100%{box-shadow:0 0 0 0 rgba(46,212,122,0)}}
+.grid{display:grid;gap:16px}
+.metrics{grid-template-columns:repeat(4,1fr);margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,10,40,.28);position:relative;overflow:hidden}
+.m .lab{color:var(--mu);font-size:12px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.m .val{font-size:28px;font-weight:800;letter-spacing:-1px;margin:8px 0 4px}
+.m .sub{font-size:12px;color:var(--mu)}
+.up{color:var(--ok);font-weight:600}.bar{height:6px;background:rgba(255,255,255,.1);border-radius:9px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cy),#5CE1FF);border-radius:9px}
+.m.alert{border-color:rgba(255,90,110,.5)}.m.alert .val{color:#FF8A99}
+h2{margin:0 0 4px;font-size:16px;letter-spacing:-.2px}.hint{color:var(--mu);font-size:12px;margin:0 0 14px}
+.row2{grid-template-columns:1.15fr 1fr;margin-bottom:16px}
+.row3{grid-template-columns:1.25fr 1fr;margin-bottom:16px}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.tag{font-size:10px;font-weight:700;letter-spacing:.6px;padding:4px 8px;border-radius:6px;background:rgba(0,186,242,.15);color:var(--cy);white-space:nowrap}
+/* voice */
+.mic-wrap{display:flex;align-items:center;gap:16px;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--bd);margin-bottom:12px}
+.mic{width:58px;height:58px;border-radius:50%;background:var(--cy);display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 0 6px rgba(0,186,242,.18);transition:.2s}
+.mic:hover{transform:scale(1.06)}.mic svg{width:26px;height:26px;color:#002E6E}
+.mic.live{animation:ring 1.2s infinite;background:#fff}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(0,186,242,.7)}100%{box-shadow:0 0 0 22px rgba(0,186,242,0)}}
+.viz{flex:1;display:flex;align-items:center;gap:3px;height:48px}
+.viz i{flex:1;max-width:5px;background:var(--cy);border-radius:4px;height:6px;opacity:.5;transition:height .12s}
+.viz.live i{opacity:1}
+.mstat{font-size:12px;color:var(--mu);min-width:110px;text-align:right}
+.chips{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.chip{text-align:left;padding:10px 14px;border-radius:12px;background:rgba(0,186,242,.08);border:1px solid var(--bd);transition:.2s;font-size:13px}
+.chip:hover{background:rgba(0,186,242,.2);transform:translateX(3px)}
+.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:12px;background:#00225A;border:1px solid var(--bd);border-radius:14px}
+.chat::-webkit-scrollbar{width:6px}.chat::-webkit-scrollbar-thumb{background:var(--bd);border-radius:6px}
+.msg{max-width:92%;padding:11px 14px;border-radius:14px;line-height:1.5;animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.msg.u{align-self:flex-end;background:var(--cy);color:#002E6E;font-weight:600;border-bottom-right-radius:4px}
+.msg.a{align-self:flex-start;background:var(--card2);border:1px solid var(--bd);border-bottom-left-radius:4px}
+.msg .who{font-size:10px;color:var(--cy);font-weight:700;letter-spacing:.6px;margin-bottom:4px}
+.msg ul{margin:8px 0;padding:0;list-style:none}.msg li{display:flex;justify-content:space-between;gap:14px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+.typing span{display:inline-block;width:6px;height:6px;margin-right:3px;border-radius:50%;background:var(--cy);animation:bl 1s infinite}.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.2;transform:translateY(-3px)}}
+.btn{padding:9px 16px;border-radius:10px;background:var(--cy);color:#002E6E;font-weight:700;transition:.2s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}.btn:disabled{opacity:.6;cursor:default;transform:none}
+.btn.ghost{background:transparent;color:#fff;border:1px solid var(--bd)}
+.btn.ok{background:var(--ok);color:#00331A}
+.acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mini{display:flex;align-items:flex-end;gap:5px;height:70px;margin:10px 0 4px}
+.mini i{flex:1;background:rgba(0,186,242,.45);border-radius:4px 4px 0 0}.mini i.pk{background:var(--cy)}
+/* table */
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:480px}
+th{text-align:left;font-size:11px;color:var(--mu);font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:8px 10px}
+td{padding:12px 10px;border-top:1px solid rgba(255,255,255,.08)}
+.b{font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;display:inline-block}
+.b.n{background:rgba(46,212,122,.16);color:var(--ok)}.b.l{background:rgba(255,176,32,.16);color:var(--warn)}.b.c{background:rgba(255,90,110,.18);color:#FF8A99}.b.s{background:rgba(0,186,242,.18);color:var(--cy)}
+.ubar{width:70px;height:5px;background:rgba(255,255,255,.1);border-radius:5px;margin-top:5px}.ubar i{display:block;height:100%;border-radius:5px}
+/* loan */
+.loan{background:linear-gradient(135deg,#0A5CC7,#00BAF2);border:0;color:#fff}
+.loan .big{font-size:36px;font-weight:800;letter-spacing:-1px;margin:6px 0}
+.loan p{margin:0 0 14px;color:#E6F6FF;line-height:1.5}
+.loan .btn{background:#fff;color:#002E6E;width:100%;padding:12px}
+.prog{height:8px;background:rgba(255,255,255,.3);border-radius:8px;overflow:hidden;margin:12px 0 6px}.prog i{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+.chart{width:100%;height:auto;display:block}
+.stack{display:grid;gap:16px;align-content:start}
+/* marketing */
+.mk{grid-template-columns:1fr 1fr}
+.banner{border-radius:16px;padding:22px;background:linear-gradient(140deg,#FFD23F 0%,#FF8A00 100%);color:#2B1500;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.banner .sh{font-weight:700;font-size:12px;letter-spacing:.5px;opacity:.8}.banner .off{font-size:54px;font-weight:800;line-height:1;letter-spacing:-2px}
+.banner .ft{display:flex;justify-content:space-between;align-items:flex-end;font-weight:600;font-size:13px}
+.qr{width:52px;height:52px;background:#fff;border-radius:6px;padding:4px}
+.wa{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--mu);margin-top:8px}
+select{width:100%;padding:10px;border-radius:10px;background:var(--card2);color:#fff;border:1px solid var(--bd);font:inherit;margin-bottom:12px}
+.kv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:4px 0 14px}.kv div{background:var(--card2);border-radius:10px;padding:10px;text-align:center}.kv b{display:block;font-size:18px}.kv span{font-size:11px;color:var(--mu)}
+/* view switching */
+body[data-v="voice"] [data-s]:not([data-s~="voice"]),body[data-v="inv"] [data-s]:not([data-s~="inv"]),body[data-v="loan"] [data-s]:not([data-s~="loan"]),body[data-v="mkt"] [data-s]:not([data-s~="mkt"]){display:none}
+body[data-v]:not([data-v="dash"]) .row2,body[data-v]:not([data-v="dash"]) .row3{grid-template-columns:1fr}
+/* modal + toast */
+.ov{position:fixed;inset:0;background:rgba(0,12,40,.7);backdrop-filter:blur(4px);display:none;place-items:center;z-index:50;padding:16px}.ov.on{display:grid}
+.modal{width:min(560px,100%);background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px;animation:in .25s ease;max-height:92vh;overflow:auto}
+.sup{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px;border-radius:12px;background:var(--card2);margin:12px 0;font-size:13px}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:800;padding:14px 0 4px;border-top:1px solid var(--bd);margin-top:6px}
+#toasts{position:fixed;right:18px;top:calc(18px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:10px;z-index:99}
+.toast{background:#fff;color:#002E6E;padding:13px 16px;border-radius:12px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:10px;align-items:flex-start;max-width:340px;animation:in .3s ease;border-left:5px solid var(--ok)}
+.toast small{display:block;font-weight:500;color:#456;margin-top:2px}
+@media(max-width:1100px){.metrics{grid-template-columns:repeat(2,1fr)}.row2,.row3{grid-template-columns:1fr}}
+@media(max-width:820px){
+ aside{position:fixed;bottom:0;top:auto;left:0;right:0;width:100%;height:auto;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:40;border-right:0;border-top:1px solid var(--bd);justify-content:space-around}
+ .logo,.side-foot{display:none}.nav{flex-direction:column;gap:3px;font-size:10px;padding:7px 6px;flex:1;text-align:center}.nav.on{box-shadow:none}
+ main{padding:16px 14px 96px}.mk{grid-template-columns:1fr}.mic-wrap{flex-wrap:wrap}.mstat{text-align:left}
+}
+@media(max-width:520px){.metrics{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-v="dash">
+<div class="app">
+<aside>
+ <div class="logo">
+  <svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#00BAF2"/><path d="M9 24V10h8a5 5 0 010 10h-4" stroke="#002E6E" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+  <div><b>pay<span>tm</span></b><small>Vyapar-Growth Copilot</small></div>
+ </div>
+ <button class="nav on" data-v="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</button>
+ <button class="nav" data-v="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v4"/></svg>Voice Assistant</button>
+ <button class="nav" data-v="inv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg>Inventory AI</button>
+ <button class="nav" data-v="loan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Micro-Lending</button>
+ <button class="nav" data-v="mkt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11v3a1 1 0 001 1h3l8 5V5L7 10H4a1 1 0 00-1 1zM19 8a5 5 0 010 8"/></svg>Marketing Agent</button>
+ <div class="side-foot"><b>Sharma General Store</b>Paytm Soundbox · MID 8841-2290<br>Hyderabad, Telangana</div>
+</aside>
+
+<main>
+ <div class="top">
+  <div><h1>Namaste, Sharma ji 👋</h1><p>Here’s how your store is doing today — Wed, 11 Nov 2026</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill"><i class="dot"></i>Live · Paytm QR synced</span><span class="pill">Powered by Sarvam AI · 10 Indian languages</span></div>
+ </div>
+
+ <section class="grid metrics" data-s="dash">
+  <div class="card m"><div class="lab">Today’s QR Collections <span class="tag">LIVE</span></div><div class="val" id="qr">₹14,250</div><div class="sub"><span class="up">▲ 12.4%</span> vs yesterday · 86 txns</div></div>
+  <div class="card m alert"><div class="lab">Stock-Out Risk Alert <span class="tag" style="background:rgba(255,90,110,.2);color:#FF8A99">URGENT</span></div><div class="val" id="riskv">2 items critical</div><div class="sub">Milk &amp; Bread may run out in &lt; 2 days</div></div>
+  <div class="card m"><div class="lab">Merchant Credit Score</div><div class="val">780<span style="font-size:15px;color:var(--mu)">/900</span></div><div class="sub"><span class="up">High Liquidity</span></div><div class="bar"><i style="width:86.6%"></i></div></div>
+  <div class="card m"><div class="lab">Working Capital Pre-Approval</div><div class="val" id="limit">₹1,50,000</div><div class="sub" id="limsub">Pre-approved · 0% processing fee</div></div>
+ </section>
+
+ <div class="grid row2">
+  <section class="card" data-s="dash voice">
+   <div class="head"><div><h2>Voice Copilot</h2><p class="hint">Ask in Hindi, Telugu, English &amp; more — Sarvam AI speech engine</p></div><span class="tag">SARVAM AI</span></div>
+   <div class="mic-wrap">
+    <button class="mic" id="mic" aria-label="Tap to speak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v4"/></svg></button>
+    <div class="viz" id="viz"></div>
+    <div class="mstat" id="mstat">Tap to speak<br>हिन्दी · తెలుగు · English</div>
+   </div>
+   <div class="chips">
+    <button class="chip" data-q="0">🎙️ “Agle hafte kitna doodh aur bread mangwana chahiye?” <span style="color:var(--mu)">(Hindi)</span></button>
+    <button class="chip" data-q="1">🎙️ “Show my peak transaction hours for today”</button>
+    <button class="chip" data-q="2">🎙️ “Generate WhatsApp discount banner for inactive customers”</button>
+   </div>
+   <div class="chat" id="chat"><div class="msg a"><div class="who">VYAPAR COPILOT</div>Namaste! I’m listening. Tap the mic or pick a question above to get started.</div></div>
+  </section>
+
+  <section class="card" data-s="dash inv">
+   <div class="head"><div><h2>Predictive Inventory</h2><p class="hint">7-day demand forecast from your Paytm QR sales + festive calendar</p></div><button class="btn" id="genpo">⚡ Auto-Generate PO</button></div>
+   <div class="tw"><table><thead><tr><th>Item</th><th>Current</th><th>Forecast (7d)</th><th>Status</th></tr></thead><tbody id="inv"></tbody></table></div>
+  </section>
+ </div>
+
+ <div class="grid row3">
+  <section class="card" data-s="dash loan">
+   <div class="head"><div><h2>Credit Health &amp; Transaction Velocity</h2><p class="hint">Daily Paytm QR volume · last 14 days (₹ thousand)</p></div><span class="tag">SCORE 780</span></div>
+   <svg class="chart" id="chart" viewBox="0 0 560 220" role="img" aria-label="Transaction velocity chart"></svg>
+   <div class="kv"><div><b>₹3.9L</b><span>30-day volume</span></div><div><b>1,184</b><span>QR txns</span></div><div><b>96%</b><span>Settlement rate</span></div></div>
+  </section>
+  <section class="stack" data-s="dash loan">
+   <div class="card loan" id="loan">
+    <div class="head"><h2 style="color:#fff">Instant Micro-Loan</h2><span class="tag" style="background:rgba(255,255,255,.25);color:#fff">1-TAP</span></div>
+    <div class="big" id="lamt">₹50,000</div>
+    <p id="ltxt">Pre-approved micro-loan of ₹50,000 based on last 30 days Paytm QR trends. Disburse in 60 seconds.</p>
+    <button class="btn" id="lbtn">Apply Micro-Loan</button>
+    <div id="lprog" style="display:none"><div class="prog"><i id="lbar"></i></div><div id="lstat" style="font-size:12px"></div></div>
+   </div>
+   <div class="card"><h2>Why you qualify</h2><p class="hint" style="margin:6px 0 0">✓ 9 consecutive weeks of growing QR volume<br>✓ 0 settlement disputes · ✓ 41 repeat customers/week<br>✓ Interest from 1.2%/month · flexible 3–12 month EMI</p></div>
+  </section>
+ </div>
+
+ <section class="card" data-s="dash mkt">
+  <div class="head"><div><h2>Hyper-Local WhatsApp Marketing Agent</h2><p class="hint">AI designs the creative, picks the audience, and sends — all from Paytm Business</p></div><span class="tag">WHATSAPP</span></div>
+  <div class="grid mk">
+   <div><div class="banner" id="banner"><div class="sh" id="bsh">SHARMA GENERAL STORE · KPHB</div><div><div class="off" id="boff">10% OFF</div><div style="font-size:18px;font-weight:700;margin-top:6px" id="bsub">on daily groceries after 6 PM</div></div>
+    <div class="ft"><span id="bft">Today only · Pay via Paytm QR</span><svg class="qr" viewBox="0 0 10 10"><path fill="#002E6E" d="M0 0h4v4H0zM6 0h4v4H6zM0 6h4v4H0zM5 5h2v2H5zM8 5h2v1H8zM7 8h3v2H7zM5 8h1v2H5z"/></svg></div></div>
+    <div class="wa">💬 WhatsApp preview · auto-translated to Hindi &amp; Telugu</div></div>
+   <div>
+    <label class="hint" style="display:block;margin-bottom:6px">Campaign template</label>
+    <select id="tpl"><option value="0">10% off on daily groceries after 6 PM</option><option value="1">Buy 2 Atta, get 1 Sugar free — weekend</option><option value="2">We miss you! ₹50 off on ₹500+ (inactive 30d)</option></select>
+    <div class="kv"><div><b>120</b><span>Repeat customers</span></div><div><b>~38</b><span>Est. visits</span></div><div><b>₹9.2K</b><span>Est. revenue</span></div></div>
+    <button class="btn" id="send" style="width:100%;padding:13px">📤 Send to 120 repeat customers</button>
+    <div class="wa" id="sstat">Best send time: 5:30 PM · expected open rate 91%</div>
+   </div>
+  </div>
+ </section>
+</main>
+</div>
+
+<div class="ov" id="ov"><div class="modal" id="modal"></div></div>
+<div id="toasts"></div>
+
+<script>
+const $=s=>document.querySelector(s),inr=n=>'₹'+n.toLocaleString('en-IN');
+const items=[
+ {n:'Full Cream Milk (1 L)',u:24,f:140,s:'c',po:{q:140,p:54}},
+ {n:'Bread (400 g)',u:18,f:90,s:'c',po:{q:80,p:38}},
+ {n:'Aashirvaad Atta 5 kg',u:42,f:60,s:'l',po:{q:24,p:265}},
+ {n:'Amul Butter 100 g',u:30,f:48,s:'l',po:{q:30,p:56}},
+ {n:'Sugar (1 kg)',u:64,f:45,s:'n'},{n:'Tata Tea 250 g',u:52,f:40,s:'n'}];
+const lbl={n:'Normal',l:'Low',c:'Critical',s:'PO Sent'},col={n:'#2ED47A',l:'#FFB020',c:'#FF5A6E',s:'#00BAF2'};
+function renderInv(){
+ $('#inv').innerHTML=items.map(i=>`<tr><td><b>${i.n}</b></td><td>${i.u} units<div class="ubar"><i style="width:${Math.min(100,i.u/i.f*100)}%;background:${col[i.s]}"></i></div></td><td>${i.f} units</td><td><span class="b ${i.s}">${lbl[i.s]}</span></td></tr>`).join('');
+ const c=items.filter(i=>i.s=='c').length;
+ $('#riskv').textContent=c?c+' items critical':'All stocked ✓';
+}
+renderInv();
+function toast(t,s){const d=document.createElement('div');d.className='toast';d.innerHTML=`<span>✅</span><div>${t}<small>${s||''}</small></div>`;$('#toasts').appendChild(d);setTimeout(()=>{d.style.opacity=0;d.style.transition='.4s';setTimeout(()=>d.remove(),400)},4200)}
+/* nav */
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>go(b.dataset.v));
+function go(v){document.body.dataset.v=v;document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.v==v));window.scrollTo({top:0,behavior:'smooth'})}
+/* visualizer */
+const viz=$('#viz');for(let i=0;i<48;i++)viz.appendChild(document.createElement('i'));
+let vt;function live(on){$('#mic').classList.toggle('live',on);viz.classList.toggle('live',on);clearInterval(vt);const bars=[...viz.children];
+ if(on)vt=setInterval(()=>bars.forEach((b,i)=>b.style.height=(6+Math.abs(Math.sin(Date.now()/160+i*.5))*Math.random()*40)+'px'));else bars.forEach(b=>b.style.height='6px')}
+live(false);
+/* PO */
+function openPO(){
+ const l=items.filter(i=>i.po&&i.s!='s');if(!l.length){toast('No pending POs','All critical items already ordered.');return}
+ const tot=l.reduce((a,i)=>a+i.po.q*i.po.p,0);
+ $('#modal').innerHTML=`<div class="head"><div><h2>Auto-Generated Purchase Order</h2><p class="hint">PO #VG-2611-0482 · AI forecast accuracy 94%</p></div><span class="tag">DRAFT</span></div>
+ <div class="sup"><span><b>Supplier:</b> Hyderabad Dairy &amp; Provisions Wholesale</span><span>📞 +91 98480 12345</span><span>Delivery: Tomorrow, 7 AM</span></div>
+ <table style="min-width:0"><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th style="text-align:right">Amount</th></tr></thead><tbody>${l.map(i=>`<tr><td>${i.n}</td><td>${i.po.q}</td><td>${inr(i.po.p)}</td><td style="text-align:right">${inr(i.po.q*i.po.p)}</td></tr>`).join('')}</tbody></table>
+ <div class="tot"><span>Estimated Cost</span><span>${inr(tot)}</span></div>
+ <div class="acts" style="margin-top:14px"><button class="btn" id="apo" style="flex:1;padding:12px">Approve &amp; Send PO</button><button class="btn ghost" onclick="closeM()">Cancel</button></div>`;
+ $('#ov').classList.add('on');
+ $('#apo').onclick=function(){this.disabled=true;this.textContent='Sending via WhatsApp…';setTimeout(()=>{l.forEach(i=>i.s='s');renderInv();closeM();toast('Purchase Order sent!','Supplier confirmed delivery for tomorrow 7 AM · '+inr(tot));
+  document.querySelectorAll('.po-btn').forEach(b=>{b.disabled=true;b.textContent='PO Sent ✓'})},1200)}
+}
+function closeM(){$('#ov').classList.remove('on')}
+$('#ov').onclick=e=>{if(e.target.id=='ov')closeM()};
+$('#genpo').onclick=openPO;
+/* chat */
+const Q=[
+ {q:'Agle hafte kitna doodh aur bread mangwana chahiye?',a:()=>`Sharma ji, pichle 4 hafton ki sales aur weekend demand ke hisaab se agle 7 din ke liye:<ul><li><span>🥛 Doodh (1 L)</span><b>140 packs</b></li><li><span>🍞 Bread</span><b>80 packs</b></li><li><span>Estimated cost</span><b>₹6,600</b></li></ul>Doodh sirf 1.5 din ka bacha hai. Main PO bana deta hoon.<div class="acts"><button class="btn po-btn" onclick="openPO()">Approve PO</button><button class="btn ghost" onclick="go('inv')">View Inventory</button></div>`},
+ {q:'Show my peak transaction hours for today',a:()=>`Your peak window today is <b>6 PM – 8 PM</b>, with 34% of all QR collections (₹4,850).<div class="mini">${[2,3,5,4,6,5,8,14,26,34,22,9].map((h,i)=>`<i class="${h>20?'pk':''}" style="height:${h*2}%"></i>`).join('')}</div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--mu)"><span>9 AM</span><span>3 PM</span><span>9 PM</span></div>Tip: a 6 PM offer can lift evening volume by ~18%.<div class="acts"><button class="btn" onclick="go('mkt')">Schedule 6 PM Offer</button></div>`},
+ {q:'Generate WhatsApp discount banner for inactive customers',a:()=>`Found <b>47 customers</b> inactive for 30+ days. I’ve created a win-back banner: “We miss you! ₹50 off on ₹500+”.<div class="acts"><button class="btn" onclick="setTpl(2);go('mkt')">Preview &amp; Send</button><button class="btn" style="background:var(--ok);color:#00331A" onclick="setTpl(2);quickSend(47)">Apply &amp; Send to 47</button></div>`}];
+function ask(i){
+ const c=$('#chat');c.insertAdjacentHTML('beforeend',`<div class="msg u">${Q[i].q}</div>`);
+ const t=document.createElement('div');t.className='msg a';t.innerHTML='<div class="who">VYAPAR COPILOT</div><span class="typing"><span></span><span></span><span></span></span>';c.appendChild(t);c.scrollTop=c.scrollHeight;
+ live(true);$('#mstat').innerHTML='Processing…<br>Sarvam AI';
+ setTimeout(()=>{live(false);$('#mstat').innerHTML='Tap to speak<br>हिन्दी · తెలుగు · English';t.innerHTML='<div class="who">VYAPAR COPILOT</div>'+Q[i].a();c.scrollTop=c.scrollHeight},1500);
+}
+document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>ask(+b.dataset.q));
+let mi=0;$('#mic').onclick=()=>{live(true);$('#mstat').innerHTML='Listening…<br>बोलिए';setTimeout(()=>ask(mi++%3),1800)};
+/* chart */
+(function(){const d=[8,9,11,10,12,13,15,12,14,16,15,18,17,19.5],W=560,H=220,p=28,bw=(W-p*2)/d.length,mx=22;
+ let s=[0,10,20].map(v=>{const y=H-p-v/mx*(H-p*2);return `<line x1="${p}" x2="${W-p}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.1)"/><text x="2" y="${y+4}" fill="#A9BEDC" font-size="10">${v}</text>`}).join('');
+ s+=d.map((v,i)=>{const h=v/mx*(H-p*2),x=p+i*bw+5;return `<rect x="${x}" y="${H-p-h}" width="${bw-10}" height="${h}" rx="4" fill="${i==d.length-1?'#00BAF2':'rgba(0,186,242,.4)'}"><title>₹${v}K</title></rect>`}).join('');
+ const pts=d.map((v,i)=>`${p+i*bw+bw/2},${H-p-v/mx*(H-p*2)}`).join(' ');
+ s+=`<polyline points="${pts}" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><text x="${W-p}" y="${H-8}" fill="#A9BEDC" font-size="10" text-anchor="end">Today</text><text x="${p}" y="${H-8}" fill="#A9BEDC" font-size="10">14 days ago</text>`;
+ $('#chart').innerHTML=s})();
+/* loan */
+$('#lbtn').onclick=function(){
+ this.disabled=true;this.textContent='Processing…';$('#lprog').style.display='block';
+ const st=['Verifying KYC & QR history…','Running credit decision…','Generating e-mandate…','Disbursing to bank a/c ••4821…'];let p=0;
+ const t=setInterval(()=>{p+=4;$('#lbar').style.width=p+'%';$('#lstat').textContent=st[Math.min(3,Math.floor(p/26))]+' ('+Math.max(0,60-Math.round(p*.6))+'s left)';
+  if(p>=100){clearInterval(t);
+   $('#loan').style.background='linear-gradient(135deg,#0B8F4F,#2ED47A)';$('#lamt').textContent='₹50,000 Disbursed ✓';
+   $('#ltxt').textContent='Credited to your bank account ending 4821. First EMI of ₹4,420 due on 11 Dec. Happy growing, Sharma ji!';
+   $('#lprog').style.display='none';this.textContent='Loan Active · View Repayment';
+   $('#limit').textContent='₹1,00,000';$('#limsub').textContent='Remaining limit after ₹50,000 disbursal';
+   toast('₹50,000 disbursed in 60 seconds','Credited to HDFC ••4821 · Ref PTM-LN-77120')}},300)};
+/* marketing */
+const T=[['10% OFF','on daily groceries after 6 PM','Today only · Pay via Paytm QR'],['BUY 2 GET 1','Atta + free Sugar 1 kg','Sat–Sun · Pay via Paytm QR'],['₹50 OFF','We miss you! On orders of ₹500+','Valid 7 days · Pay via Paytm QR']];
+function setTpl(i){$('#tpl').value=i;$('#boff').textContent=T[i][0];$('#bsub').textContent=T[i][1];$('#bft').textContent=T[i][2]}
+$('#tpl').onchange=e=>setTpl(+e.target.value);
+function quickSend(n){toast('WhatsApp campaign sent','Delivered to '+n+' customers · tracking opens live')}
+$('#send').onclick=function(){this.disabled=true;this.textContent='Sending… 0/120';let n=0;
+ const t=setInterval(()=>{n+=12;if(n>120)n=120;this.textContent=`Sending… ${n}/120`;
+  if(n==120){clearInterval(t);this.textContent='Sent to 120 customers ✓';this.className='btn ok';$('#sstat').textContent='✓ 118 delivered · 3 opened in the first minute';
+   toast('Campaign sent to 120 repeat customers','“'+T[+$('#tpl').value][0]+'” is live on WhatsApp');
+   setTimeout(()=>{this.disabled=false;this.className='btn';this.textContent='📤 Send to 120 repeat customers'},4000)}},180)};
+</script>
+</body>
+</html>
