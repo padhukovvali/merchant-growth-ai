@@ -1,1 +1,0 @@
-# merchant-growth-ai
